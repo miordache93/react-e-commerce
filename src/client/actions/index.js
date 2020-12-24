@@ -1,0 +1,46 @@
+const path = "/.netlify/functions/server"
+
+export const FETCH_CURRENT_USER = 'FETCH_CURRENT_USER';
+export const FETCH_PRODUCT_BY_ID = 'FETCH_PRODUCT_BY_ID';
+export const FETCH_PRODUCTS = 'FETCH_PRODUCTS';
+
+
+export const createUser = (data) => async (dispatch, getState, api) => {
+    await api.post(`${path}/users`, {
+        body: {
+            username: data.username || 'mihai',
+            password: data.password || 'test123'
+        }
+    }, err => {
+        console.log(err);
+    });
+};
+
+export const fetchCurrentUser = (username) => async (dispatch, getState, api) => {
+    api.defaults.headers.common['Authorization'] = 'Basic bWloYWk6dGVzdDEyMw==';
+
+    const res = await api.get(`${path}/users/${username}`);
+
+    dispatch({
+        type: FETCH_CURRENT_USER,
+        payload: res
+    });
+};
+
+export const fetchProducts = () => async (dispatch, getState, api) => {
+    const res = await api.get(`${path}/products`);
+
+    dispatch({
+        type: FETCH_PRODUCTS,
+        payload: { data: res.data.products }
+    });
+};
+
+export const fetchProductById = (id) => async (dispatch, getState, api) => {
+    const res = await api.get(`${path}/products/${id}`);
+
+    dispatch({
+        type: FETCH_PRODUCT_BY_ID,
+        payload: { data: res.data }
+    });
+};
