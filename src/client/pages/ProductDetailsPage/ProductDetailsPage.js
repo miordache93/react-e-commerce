@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {fetchProductById} from '../actions';
+import {fetchProductById} from '../../actions';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 

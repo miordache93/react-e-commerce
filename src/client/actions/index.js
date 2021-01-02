@@ -1,12 +1,13 @@
-const path = "/.netlify/functions/server"
+const path = "/.netlify/functions"
 
 export const FETCH_CURRENT_USER = 'FETCH_CURRENT_USER';
 export const FETCH_PRODUCT_BY_ID = 'FETCH_PRODUCT_BY_ID';
 export const FETCH_PRODUCTS = 'FETCH_PRODUCTS';
+export const ADD_PROD_TO_CART = 'ADD_PROD_TO_CART';
 
 
 export const createUser = (data) => async (dispatch, getState, api) => {
-    await api.post(`${path}/users`, {
+    await api.post(`${path}/users-create`, {
         body: {
             username: data.username || 'mihai',
             password: data.password || 'test123'
@@ -19,7 +20,11 @@ export const createUser = (data) => async (dispatch, getState, api) => {
 export const fetchCurrentUser = (username) => async (dispatch, getState, api) => {
     api.defaults.headers.common['Authorization'] = 'Basic bWloYWk6dGVzdDEyMw==';
 
-    const res = await api.get(`${path}/users/${username}`);
+    const res = await api.get(`${path}/users-get/${username}`);
+
+    if (res) {
+        window.localStorage.setItem('authenticated', true);
+    }
 
     dispatch({
         type: FETCH_CURRENT_USER,

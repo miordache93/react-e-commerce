@@ -10,7 +10,6 @@ import reducers from './reducers'
 import { renderRoutes } from 'react-router-config';
 import axios from 'axios';
 
-
 const axiosInstance = axios.create({
     baseURL: '/api',
     headers: {
@@ -18,9 +17,21 @@ const axiosInstance = axios.create({
     }
 });
 
+const authState = JSON.parse(window.localStorage.getItem('authenticated'));
+
+if (authState) {
+    axiosInstance.defaults.headers.common['Authorization'] = 'Basic bWloYWk6dGVzdDEyMw==';
+}
+let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+const state = {
+    ...window.INITIAL_STATE, auth: authState,
+    cartItems
+};
+
 const store = createStore(
     reducers,
-    window.INITIAL_STATE,
+    state,
     applyMiddleware(thunk.withExtraArgument(axiosInstance))
 );
 

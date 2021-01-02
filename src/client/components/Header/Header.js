@@ -2,9 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const Header = ({ auth }) => {
-    console.log('My auth status is: ', auth);
-
+const Header = ({ auth, cartItems }) => {
     const authButton = auth ? (
         <a href="/api/logout">Logout</a>
     ) : (
@@ -24,12 +22,15 @@ const Header = ({ auth }) => {
                     <li>
                         {authButton}
                     </li>
+                    <li>
+                        Cart products: { cartItems.length }
+                    </li>
                 </ul>
             </div>
         </nav>
     )
 };
-function mapStateToProps({ auth }) {
-    return { auth }
+function mapStateToProps({ auth, cartItems }) {
+    return { auth, cartItems }
 }
 export default connect(mapStateToProps)(Header);

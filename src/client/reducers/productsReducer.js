@@ -1,4 +1,4 @@
-import { FETCH_PRODUCTS, FETCH_PRODUCT_BY_ID } from '../actions';
+import { FETCH_PRODUCTS } from '../actions';
 
 export default (state = [], action) => {
     switch (action.type) {

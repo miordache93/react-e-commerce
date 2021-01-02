@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { fetchCurrentUser } from '../actions';
+import React from 'react';
+import { fetchCurrentUser } from '../../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { Redirect } from 'react-router-dom';

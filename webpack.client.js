@@ -1,6 +1,7 @@
 const path = require('path');
-const merge = require('webpack-merge');
 const baseConfig = require('./webpack.base.js');
+const { merge } = require('webpack-merge');
+
 
 const config = {
     // root file for server app
@@ -10,6 +11,23 @@ const config = {
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'public')
+    },
+    module: {
+        rules: [
+            {
+                test: /\.css$/i,
+                exclude: /node_modules/,
+                use: [
+                  'style-loader',
+                  {
+                    loader: 'css-loader',
+                    options: {
+                      modules: true,
+                    },
+                  },
+                ],
+              },
+        ]
     }
 };
 

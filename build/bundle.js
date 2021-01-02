@@ -94,7 +94,7 @@ Object.defineProperty(exports, "__esModule", {
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
-var path = "/.netlify/functions/server";
+var path = "/.netlify/functions";
 
 var FETCH_CURRENT_USER = exports.FETCH_CURRENT_USER = 'FETCH_CURRENT_USER';
 var FETCH_PRODUCT_BY_ID = exports.FETCH_PRODUCT_BY_ID = 'FETCH_PRODUCT_BY_ID';
@@ -108,7 +108,7 @@ var createUser = exports.createUser = function createUser(data) {
                     switch (_context.prev = _context.next) {
                         case 0:
                             _context.next = 2;
-                            return api.post(path + '/users', {
+                            return api.post(path + '/users-create', {
                                 body: {
                                     username: data.username || 'mihai',
                                     password: data.password || 'test123'
@@ -142,18 +142,22 @@ var fetchCurrentUser = exports.fetchCurrentUser = function fetchCurrentUser(user
                             api.defaults.headers.common['Authorization'] = 'Basic bWloYWk6dGVzdDEyMw==';
 
                             _context2.next = 3;
-                            return api.get(path + '/users/' + username);
+                            return api.get(path + '/users-get/' + username);
 
                         case 3:
                             res = _context2.sent;
 
+
+                            if (res) {
+                                window.localStorage.setItem('authenticated', true);
+                            }
 
                             dispatch({
                                 type: FETCH_CURRENT_USER,
                                 payload: res
                             });
 
-                        case 5:
+                        case 6:
                         case 'end':
                             return _context2.stop();
                     }
@@ -280,11 +284,11 @@ var _ProductsPage = __webpack_require__(14);
 
 var _ProductsPage2 = _interopRequireDefault(_ProductsPage);
 
-var _LoginPage = __webpack_require__(16);
+var _LoginPage = __webpack_require__(18);
 
 var _LoginPage2 = _interopRequireDefault(_LoginPage);
 
-var _ProductDetailsPage = __webpack_require__(17);
+var _ProductDetailsPage = __webpack_require__(19);
 
 var _ProductDetailsPage2 = _interopRequireDefault(_ProductDetailsPage);
 
@@ -322,15 +326,15 @@ var _Routes = __webpack_require__(6);
 
 var _Routes2 = _interopRequireDefault(_Routes);
 
-var _renderer = __webpack_require__(18);
+var _renderer = __webpack_require__(20);
 
 var _renderer2 = _interopRequireDefault(_renderer);
 
-var _createStore = __webpack_require__(21);
+var _createStore = __webpack_require__(23);
 
 var _createStore2 = _interopRequireDefault(_createStore);
 
-var _expressHttpProxy = __webpack_require__(28);
+var _expressHttpProxy = __webpack_require__(30);
 
 var _expressHttpProxy2 = _interopRequireDefault(_expressHttpProxy);
 
@@ -487,8 +491,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Header = function Header(_ref) {
     var auth = _ref.auth;
 
-    console.log('My auth status is: ', auth);
-
     var authButton = auth ? _react2.default.createElement(
         'a',
         { href: '/api/logout' },
@@ -606,6 +608,10 @@ var _requireAuth2 = _interopRequireDefault(_requireAuth);
 
 var _reactRouterDom = __webpack_require__(1);
 
+var _ProductCard = __webpack_require__(16);
+
+var _ProductCard2 = _interopRequireDefault(_ProductCard);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -629,26 +635,16 @@ var ProductsPage = function (_Component) {
             this.props.fetchProducts();
         }
     }, {
-        key: 'renderProducts',
-        value: function renderProducts() {
-            return this.props.products.map(function (prod) {
-                return _react2.default.createElement(
-                    'li',
-                    { key: prod.id },
-                    _react2.default.createElement(
-                        _reactRouterDom.Link,
-                        { to: '/product/' + prod.id },
-                        prod.name,
-                        ' '
-                    )
-                );
-            });
-        }
-    }, {
         key: 'render',
         value: function render() {
             if (this.props.products.length > 0) {
-                return this.renderProducts();
+                return _react2.default.createElement(
+                    'div',
+                    { className: 'productPage-container' },
+                    this.props.products.map(function (prod) {
+                        return _react2.default.createElement(_ProductCard2.default, { key: prod.id, product: prod });
+                    })
+                );
             } else {
                 return _react2.default.createElement(
                     'p',
@@ -757,6 +753,73 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouterDom = __webpack_require__(1);
+
+var _ProductCard = __webpack_require__(17);
+
+var _ProductCard2 = _interopRequireDefault(_ProductCard);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ProductCard = function ProductCard(_ref) {
+    var product = _ref.product;
+
+
+    var addToCart = function addToCart(ev, prod) {
+        console.log('Product added to cart -- ev', ev);
+        console.log('Product added to cart -- prod', prod);
+    };
+
+    return _react2.default.createElement(
+        'div',
+        { className: 'productCard' },
+        _react2.default.createElement(
+            'h4',
+            null,
+            product.name
+        ),
+        _react2.default.createElement(
+            'div',
+            { className: 'productCard-actions' },
+            _react2.default.createElement(
+                'button',
+                { onClick: function onClick(ev) {
+                        return addToCart(ev, product);
+                    } },
+                'Add to cart'
+            ),
+            _react2.default.createElement(
+                _reactRouterDom.Link,
+                { to: '/product/' + product.id },
+                'View product '
+            )
+        )
+    );
+};
+
+exports.default = ProductCard;
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
 var _actions = __webpack_require__(3);
 
 var _reactRedux = __webpack_require__(2);
@@ -804,7 +867,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 17 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -903,7 +966,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 18 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -917,7 +980,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _server = __webpack_require__(19);
+var _server = __webpack_require__(21);
 
 var _reactRouterDom = __webpack_require__(1);
 
@@ -929,7 +992,7 @@ var _reactRedux = __webpack_require__(2);
 
 var _reactRouterConfig = __webpack_require__(4);
 
-var _serializeJavascript = __webpack_require__(20);
+var _serializeJavascript = __webpack_require__(22);
 
 var _serializeJavascript2 = _interopRequireDefault(_serializeJavascript);
 
@@ -954,19 +1017,19 @@ exports.default = function (req, store, context) {
 };
 
 /***/ }),
-/* 19 */
+/* 21 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-dom/server");
 
 /***/ }),
-/* 20 */
+/* 22 */
 /***/ (function(module, exports) {
 
 module.exports = require("serialize-javascript");
 
 /***/ }),
-/* 21 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -978,15 +1041,15 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(5);
 
-var _reduxThunk = __webpack_require__(22);
+var _reduxThunk = __webpack_require__(24);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _reducers = __webpack_require__(23);
+var _reducers = __webpack_require__(25);
 
 var _reducers2 = _interopRequireDefault(_reducers);
 
-var _axios = __webpack_require__(27);
+var _axios = __webpack_require__(29);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -1006,13 +1069,13 @@ exports.default = function (req) {
 };
 
 /***/ }),
-/* 22 */
+/* 24 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux-thunk");
 
 /***/ }),
-/* 23 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1024,15 +1087,15 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(5);
 
-var _authReducer = __webpack_require__(24);
+var _authReducer = __webpack_require__(26);
 
 var _authReducer2 = _interopRequireDefault(_authReducer);
 
-var _productsReducer = __webpack_require__(25);
+var _productsReducer = __webpack_require__(27);
 
 var _productsReducer2 = _interopRequireDefault(_productsReducer);
 
-var _selectedProductReducer = __webpack_require__(26);
+var _selectedProductReducer = __webpack_require__(28);
 
 var _selectedProductReducer2 = _interopRequireDefault(_selectedProductReducer);
 
@@ -1045,7 +1108,7 @@ exports.default = (0, _redux.combineReducers)({
 });
 
 /***/ }),
-/* 24 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1070,7 +1133,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 25 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1095,7 +1158,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 26 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1120,13 +1183,13 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 27 */
+/* 29 */
 /***/ (function(module, exports) {
 
 module.exports = require("axios");
 
 /***/ }),
-/* 28 */
+/* 30 */
 /***/ (function(module, exports) {
 
 module.exports = require("express-http-proxy");
