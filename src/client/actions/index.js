@@ -4,6 +4,7 @@ export const FETCH_CURRENT_USER = 'FETCH_CURRENT_USER';
 export const FETCH_PRODUCT_BY_ID = 'FETCH_PRODUCT_BY_ID';
 export const FETCH_PRODUCTS = 'FETCH_PRODUCTS';
 export const ADD_PROD_TO_CART = 'ADD_PROD_TO_CART';
+export const FILTER_BY_CURRENCY = 'FILTER_BY_CURRENCY';
 
 
 export const createUser = (data) => async (dispatch, getState, api) => {
@@ -43,7 +44,7 @@ export const fetchProducts = () => async (dispatch, getState, api) => {
 
 export const fetchProductById = (id) => async (dispatch, getState, api) => {
     const res = await api.get(`${path}/products/${id}`);
-
+    console.log('ID \n', id);
     dispatch({
         type: FETCH_PRODUCT_BY_ID,
         payload: { data: res.data }

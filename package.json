@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "npm-run-all --parallel dev:*",
     "dev:server": "nodemon --watch build --exec \"node build/bundle.js\"",
-    "dev:build-server": "webpack --config webpack.server.js --watch",
-    "dev:build-client": "webpack --config webpack.client.js --watch"
+    "dev:build-server": "webpack --config webpack.server.js --watch --mode=development",
+    "dev:build-client": "webpack --config webpack.client.js --watch --mode=development"
   },
   "author": "",
   "license": "ISC",
@@ -19,8 +19,6 @@
     "babel-preset-env": "1.6.0",
     "babel-preset-es2015": "6.24.1",
     "babel-preset-es2017": "6.24.1",
-    "babel-preset-react": "6.24.1",
-    "babel-preset-stage-0": "6.24.1",
     "compression": "1.7.0",
     "concurrently": "3.5.0",
     "express": "4.15.4",
@@ -28,11 +26,12 @@
     "lodash": "4.17.4",
     "nodemon": "1.12.0",
     "npm-run-all": "4.1.1",
+    "query-string": "^6.13.8",
     "react": "16.8.0",
     "react-dom": "16.8.0",
     "react-redux": "5.0.6",
-    "react-router-config": "1.0.0-beta.4",
-    "react-router-dom": "4.2.2",
+    "react-router-config": "^5.1.1",
+    "react-router-dom": "^5.2.0",
     "react-select": "^3.1.1",
     "redux": "3.7.2",
     "redux-thunk": "2.2.0",
@@ -44,6 +43,9 @@
     "webpack-node-externals": "2.5.2"
   },
   "devDependencies": {
+    "babel-preset-latest": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^5.0.1",
     "style-loader": "^2.0.0"
   }

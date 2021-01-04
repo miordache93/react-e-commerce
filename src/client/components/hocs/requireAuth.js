@@ -4,12 +4,13 @@ import { Redirect } from 'react-router-dom';
 
 export default ChildComponent => {
     class RequireAuth extends Component {
+        
         render() {
             switch (this.props.auth) {
                 case false:
                     return <Redirect to="/login" />;
                 case null:
-                    return <Redirect to="/login" />;
+                    return <div>Loading...</div>
                 default:
                     return <ChildComponent {...this.props} />
             }

@@ -20,12 +20,13 @@ export default [
                 path: '/products'
             },
             {
-                ...LoginPage,
-                path: '/login'
+                ...ProductDetailsPage,
+                path: '/product/:id',
+                exact: true
             },
             {
-                ...ProductDetailsPage,
-                path: '/product/:id'
+                ...LoginPage,
+                path: '/login'
             },
             {
                 ...NotFoundPage

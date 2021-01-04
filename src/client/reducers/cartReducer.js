@@ -1,6 +1,6 @@
 import { ADD_PROD_TO_CART } from '../actions';
 
-export default (state = null, action) => {
+export default (state = [], action) => {
     switch (action.type) {
         case ADD_PROD_TO_CART:
             return [...new Set([...state, action.payload.data])]

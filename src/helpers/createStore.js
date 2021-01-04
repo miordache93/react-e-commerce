@@ -11,9 +11,7 @@ export default (req) => {
         }
     })
     
-    const store = createStore(reducers, {
-        cartItems: []
-    }, applyMiddleware(thunk.withExtraArgument(axiosInstance)));
+    const store = createStore(reducers, {}, applyMiddleware(thunk.withExtraArgument(axiosInstance)));
 
     return store;
 };

@@ -25,7 +25,7 @@ if (authState) {
 let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 
 const state = {
-    ...window.INITIAL_STATE, auth: authState,
+    ...window.INITIAL_STATE, auth: true,
     cartItems
 };
 

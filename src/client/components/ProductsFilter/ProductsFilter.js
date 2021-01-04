@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import styles from './ProductsFilter.css';
 import Select from 'react-select';
 
 const options = [
@@ -17,7 +16,7 @@ function ProductsFilter() {
     };
 
     return (
-        <div className={styles.productsFilter}>
+        <div>
             <p>Filters</p>
             {/* <p>{ selectedOption }</p> */}
             <Select

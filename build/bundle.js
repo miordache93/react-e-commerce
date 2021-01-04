@@ -1,1198 +1,397 @@
-/******/ (function(modules) { // webpackBootstrap
+/*
+ * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
+ * This devtool is not neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/client/App.js":
+/*!***************************!*\
+  !*** ./src/client/App.js ***!
+  \***************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterConfig = __webpack_require__(/*! react-router-config */ \"react-router-config\");\n\nvar _Header = __webpack_require__(/*! ./components/Header/Header */ \"./src/client/components/Header/Header.js\");\n\nvar _Header2 = _interopRequireDefault(_Header);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar App = function App(_ref) {\n    var route = _ref.route;\n\n    return _react2.default.createElement(\n        'div',\n        null,\n        _react2.default.createElement(_Header2.default, null),\n        (0, _reactRouterConfig.renderRoutes)(route.routes)\n    );\n};\n\nexports.default = {\n    component: App\n};\n\n//# sourceURL=webpack://react-ssr/./src/client/App.js?");
+
+/***/ }),
+
+/***/ "./src/client/Routes.js":
+/*!******************************!*\
+  !*** ./src/client/Routes.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _HomePage = __webpack_require__(/*! ./pages/HomePage/HomePage */ \"./src/client/pages/HomePage/HomePage.js\");\n\nvar _HomePage2 = _interopRequireDefault(_HomePage);\n\nvar _App = __webpack_require__(/*! ./App */ \"./src/client/App.js\");\n\nvar _App2 = _interopRequireDefault(_App);\n\nvar _NotFoundPage = __webpack_require__(/*! ./pages/NotFoundPage/NotFoundPage */ \"./src/client/pages/NotFoundPage/NotFoundPage.js\");\n\nvar _NotFoundPage2 = _interopRequireDefault(_NotFoundPage);\n\nvar _ProductsPage = __webpack_require__(/*! ./pages/ProductsPage/ProductsPage */ \"./src/client/pages/ProductsPage/ProductsPage.js\");\n\nvar _ProductsPage2 = _interopRequireDefault(_ProductsPage);\n\nvar _LoginPage = __webpack_require__(/*! ./pages/LoginPage/LoginPage */ \"./src/client/pages/LoginPage/LoginPage.js\");\n\nvar _LoginPage2 = _interopRequireDefault(_LoginPage);\n\nvar _ProductDetailsPage = __webpack_require__(/*! ./pages/ProductDetailsPage/ProductDetailsPage */ \"./src/client/pages/ProductDetailsPage/ProductDetailsPage.js\");\n\nvar _ProductDetailsPage2 = _interopRequireDefault(_ProductDetailsPage);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = [_extends({}, _App2.default, {\n    routes: [_extends({}, _HomePage2.default, {\n        path: '/',\n        exact: true\n    }), _extends({}, _ProductsPage2.default, {\n        path: '/products'\n    }), _extends({}, _ProductDetailsPage2.default, {\n        path: '/product/:id',\n        exact: true\n    }), _extends({}, _LoginPage2.default, {\n        path: '/login'\n    }), _extends({}, _NotFoundPage2.default)]\n})];\n\n//# sourceURL=webpack://react-ssr/./src/client/Routes.js?");
+
+/***/ }),
+
+/***/ "./src/client/actions/index.js":
+/*!*************************************!*\
+  !*** ./src/client/actions/index.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nfunction _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); }); }; }\n\nvar path = \"/.netlify/functions\";\n\nvar FETCH_CURRENT_USER = exports.FETCH_CURRENT_USER = 'FETCH_CURRENT_USER';\nvar FETCH_PRODUCT_BY_ID = exports.FETCH_PRODUCT_BY_ID = 'FETCH_PRODUCT_BY_ID';\nvar FETCH_PRODUCTS = exports.FETCH_PRODUCTS = 'FETCH_PRODUCTS';\nvar ADD_PROD_TO_CART = exports.ADD_PROD_TO_CART = 'ADD_PROD_TO_CART';\nvar FILTER_BY_CURRENCY = exports.FILTER_BY_CURRENCY = 'FILTER_BY_CURRENCY';\n\nvar createUser = exports.createUser = function createUser(data) {\n    return function () {\n        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState, api) {\n            return regeneratorRuntime.wrap(function _callee$(_context) {\n                while (1) {\n                    switch (_context.prev = _context.next) {\n                        case 0:\n                            _context.next = 2;\n                            return api.post(path + '/users-create', {\n                                body: {\n                                    username: data.username || 'mihai',\n                                    password: data.password || 'test123'\n                                }\n                            }, function (err) {\n                                console.log(err);\n                            });\n\n                        case 2:\n                        case 'end':\n                            return _context.stop();\n                    }\n                }\n            }, _callee, undefined);\n        }));\n\n        return function (_x, _x2, _x3) {\n            return _ref.apply(this, arguments);\n        };\n    }();\n};\n\nvar fetchCurrentUser = exports.fetchCurrentUser = function fetchCurrentUser(username) {\n    return function () {\n        var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch, getState, api) {\n            var res;\n            return regeneratorRuntime.wrap(function _callee2$(_context2) {\n                while (1) {\n                    switch (_context2.prev = _context2.next) {\n                        case 0:\n                            api.defaults.headers.common['Authorization'] = 'Basic bWloYWk6dGVzdDEyMw==';\n\n                            _context2.next = 3;\n                            return api.get(path + '/users-get/' + username);\n\n                        case 3:\n                            res = _context2.sent;\n\n\n                            if (res) {\n                                window.localStorage.setItem('authenticated', true);\n                            }\n\n                            dispatch({\n                                type: FETCH_CURRENT_USER,\n                                payload: res\n                            });\n\n                        case 6:\n                        case 'end':\n                            return _context2.stop();\n                    }\n                }\n            }, _callee2, undefined);\n        }));\n\n        return function (_x4, _x5, _x6) {\n            return _ref2.apply(this, arguments);\n        };\n    }();\n};\n\nvar fetchProducts = exports.fetchProducts = function fetchProducts() {\n    return function () {\n        var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(dispatch, getState, api) {\n            var res;\n            return regeneratorRuntime.wrap(function _callee3$(_context3) {\n                while (1) {\n                    switch (_context3.prev = _context3.next) {\n                        case 0:\n                            _context3.next = 2;\n                            return api.get(path + '/products');\n\n                        case 2:\n                            res = _context3.sent;\n\n\n                            dispatch({\n                                type: FETCH_PRODUCTS,\n                                payload: { data: res.data.products }\n                            });\n\n                        case 4:\n                        case 'end':\n                            return _context3.stop();\n                    }\n                }\n            }, _callee3, undefined);\n        }));\n\n        return function (_x7, _x8, _x9) {\n            return _ref3.apply(this, arguments);\n        };\n    }();\n};\n\nvar fetchProductById = exports.fetchProductById = function fetchProductById(id) {\n    return function () {\n        var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(dispatch, getState, api) {\n            var res;\n            return regeneratorRuntime.wrap(function _callee4$(_context4) {\n                while (1) {\n                    switch (_context4.prev = _context4.next) {\n                        case 0:\n                            _context4.next = 2;\n                            return api.get(path + '/products/' + id);\n\n                        case 2:\n                            res = _context4.sent;\n\n                            console.log('ID \\n', id);\n                            dispatch({\n                                type: FETCH_PRODUCT_BY_ID,\n                                payload: { data: res.data }\n                            });\n\n                        case 5:\n                        case 'end':\n                            return _context4.stop();\n                    }\n                }\n            }, _callee4, undefined);\n        }));\n\n        return function (_x10, _x11, _x12) {\n            return _ref4.apply(this, arguments);\n        };\n    }();\n};\n\n//# sourceURL=webpack://react-ssr/./src/client/actions/index.js?");
+
+/***/ }),
+
+/***/ "./src/client/components/Header/Header.js":
+/*!************************************************!*\
+  !*** ./src/client/components/Header/Header.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterDom = __webpack_require__(/*! react-router-dom */ \"react-router-dom\");\n\nvar _reactRedux = __webpack_require__(/*! react-redux */ \"react-redux\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Header = function Header(_ref) {\n    var auth = _ref.auth,\n        cartItems = _ref.cartItems;\n\n    var authButton = auth ? _react2.default.createElement(\n        'a',\n        { href: '/api/logout' },\n        'Logout'\n    ) : _react2.default.createElement(\n        'a',\n        { href: '/login' },\n        'Login'\n    );\n    return _react2.default.createElement(\n        'nav',\n        null,\n        _react2.default.createElement(\n            'div',\n            { className: 'nav-wrapper' },\n            _react2.default.createElement(\n                _reactRouterDom.Link,\n                { to: '/', className: 'brand-logo' },\n                'React SSR'\n            ),\n            _react2.default.createElement(\n                'ul',\n                { className: 'right' },\n                _react2.default.createElement(\n                    'li',\n                    null,\n                    _react2.default.createElement(\n                        _reactRouterDom.Link,\n                        { to: '/cart' },\n                        'Cart'\n                    )\n                ),\n                _react2.default.createElement(\n                    'li',\n                    null,\n                    _react2.default.createElement(\n                        _reactRouterDom.Link,\n                        { to: '/products' },\n                        'Products'\n                    )\n                ),\n                _react2.default.createElement(\n                    'li',\n                    null,\n                    authButton\n                ),\n                _react2.default.createElement(\n                    'li',\n                    null,\n                    'Cart products: ',\n                    cartItems.length\n                )\n            )\n        )\n    );\n};\nfunction mapStateToProps(_ref2) {\n    var auth = _ref2.auth,\n        cartItems = _ref2.cartItems;\n\n    return { auth: auth, cartItems: cartItems };\n}\nexports.default = (0, _reactRedux.connect)(mapStateToProps)(Header);\n\n//# sourceURL=webpack://react-ssr/./src/client/components/Header/Header.js?");
+
+/***/ }),
+
+/***/ "./src/client/components/ProductCard/ProductCard.js":
+/*!**********************************************************!*\
+  !*** ./src/client/components/ProductCard/ProductCard.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterDom = __webpack_require__(/*! react-router-dom */ \"react-router-dom\");\n\nvar _index = __webpack_require__(/*! ../../actions/index */ \"./src/client/actions/index.js\");\n\nvar _reactRedux = __webpack_require__(/*! react-redux */ \"react-redux\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar productCartStyles = {\n    border: '1px solid black',\n    padding: '5px',\n    boxShadow: '0 4px 8px rgba(0,0,0,0.2)',\n    margin: '10px 15px',\n    display: 'flex',\n    flexDirection: 'column',\n    width: '20%'\n};\n\nvar producCardActionsStyles = {\n    display: 'flex',\n    flexDirection: 'column',\n    width: '50%',\n    margin: 'auto',\n    padding: '5px'\n};\n\nvar ProductCard = function ProductCard(props) {\n\n    var addToCart = function addToCart(ev, prod) {\n        var cartItems = JSON.parse(window.localStorage.getItem('cartItems')) || [];\n        if (!cartItems.find(function (product) {\n            return prod.id === product.id;\n        })) {\n            cartItems.push(prod);\n            props.addProdToCart(prod);\n        } else {\n            alert('Product already in cart');\n        }\n\n        window.localStorage.setItem('cartItems', JSON.stringify(cartItems));\n    };\n\n    return _react2.default.createElement(\n        'div',\n        { styles: productCartStyles },\n        _react2.default.createElement(\n            'h6',\n            null,\n            props.product.name\n        ),\n        _react2.default.createElement(\n            'div',\n            { styles: producCardActionsStyles },\n            _react2.default.createElement(\n                'button',\n                { onClick: function onClick(ev) {\n                        return addToCart(ev, props.product);\n                    } },\n                'Add to cart'\n            ),\n            _react2.default.createElement(\n                _reactRouterDom.Link,\n                { to: '/product/' + props.product.id },\n                'View product '\n            )\n        )\n    );\n};\n\nvar mapDispatchToProps = function mapDispatchToProps(dispatch) {\n    return {\n        addProdToCart: function addProdToCart(product) {\n            dispatch({\n                type: _index.ADD_PROD_TO_CART,\n                payload: {\n                    data: product\n                }\n            });\n        }\n    };\n};\n\nexports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(ProductCard);\n\n//# sourceURL=webpack://react-ssr/./src/client/components/ProductCard/ProductCard.js?");
+
+/***/ }),
+
+/***/ "./src/client/components/ProductsFilter/ProductsFilter.js":
+/*!****************************************************************!*\
+  !*** ./src/client/components/ProductsFilter/ProductsFilter.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i[\"return\"]) _i[\"return\"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError(\"Invalid attempt to destructure non-iterable instance\"); } }; }();\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactSelect = __webpack_require__(/*! react-select */ \"react-select\");\n\nvar _reactSelect2 = _interopRequireDefault(_reactSelect);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar options = [{ value: 'usd', label: 'USD ' }, { value: 'eur', label: 'EUR' }, { value: 'ron', label: 'RON' }];\n\nfunction ProductsFilter() {\n    var _useState = (0, _react.useState)(null),\n        _useState2 = _slicedToArray(_useState, 2),\n        selectedOption = _useState2[0],\n        setSelectedOption = _useState2[1];\n\n    var handleChange = function handleChange(selectedOption) {\n        // setSelectedOption({ selectedOption });\n        console.log(selectedOption);\n    };\n\n    return _react2.default.createElement(\n        'div',\n        null,\n        _react2.default.createElement(\n            'p',\n            null,\n            'Filters'\n        ),\n        _react2.default.createElement(_reactSelect2.default, {\n            value: selectedOption,\n            onChange: handleChange,\n            options: options\n        })\n    );\n}\n\nexports.default = ProductsFilter;\n\n//# sourceURL=webpack://react-ssr/./src/client/components/ProductsFilter/ProductsFilter.js?");
+
+/***/ }),
+
+/***/ "./src/client/components/hocs/requireAuth.js":
+/*!***************************************************!*\
+  !*** ./src/client/components/hocs/requireAuth.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRedux = __webpack_require__(/*! react-redux */ \"react-redux\");\n\nvar _reactRouterDom = __webpack_require__(/*! react-router-dom */ \"react-router-dom\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nexports.default = function (ChildComponent) {\n    var RequireAuth = function (_Component) {\n        _inherits(RequireAuth, _Component);\n\n        function RequireAuth() {\n            _classCallCheck(this, RequireAuth);\n\n            return _possibleConstructorReturn(this, (RequireAuth.__proto__ || Object.getPrototypeOf(RequireAuth)).apply(this, arguments));\n        }\n\n        _createClass(RequireAuth, [{\n            key: 'render',\n            value: function render() {\n                switch (this.props.auth) {\n                    case false:\n                        return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' });\n                    case null:\n                        return _react2.default.createElement(\n                            'div',\n                            null,\n                            'Loading...'\n                        );\n                    default:\n                        return _react2.default.createElement(ChildComponent, this.props);\n                }\n            }\n        }]);\n\n        return RequireAuth;\n    }(_react.Component);\n\n    function mapStateToProps(_ref) {\n        var auth = _ref.auth;\n\n        return { auth: auth };\n    }\n\n    return (0, _reactRedux.connect)(mapStateToProps)(RequireAuth);\n};\n\n//# sourceURL=webpack://react-ssr/./src/client/components/hocs/requireAuth.js?");
+
+/***/ }),
+
+/***/ "./src/client/pages/HomePage/HomePage.js":
+/*!***********************************************!*\
+  !*** ./src/client/pages/HomePage/HomePage.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Home = function Home() {\n    return _react2.default.createElement(\n        'div',\n        { className: 'center-align', style: { martingTop: '20px' } },\n        _react2.default.createElement(\n            'h3',\n            null,\n            'Welcome '\n        ),\n        _react2.default.createElement(\n            'p',\n            null,\n            'Check out these awesome features'\n        )\n    );\n};\n\nexports.default = {\n    component: Home\n};\n\n//# sourceURL=webpack://react-ssr/./src/client/pages/HomePage/HomePage.js?");
+
+/***/ }),
+
+/***/ "./src/client/pages/LoginPage/LoginPage.js":
+/*!*************************************************!*\
+  !*** ./src/client/pages/LoginPage/LoginPage.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _actions = __webpack_require__(/*! ../../actions */ \"./src/client/actions/index.js\");\n\nvar _reactRedux = __webpack_require__(/*! react-redux */ \"react-redux\");\n\nvar _redux = __webpack_require__(/*! redux */ \"redux\");\n\nvar _reactRouterDom = __webpack_require__(/*! react-router-dom */ \"react-router-dom\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar LoginPage = function LoginPage(props) {\n    var performAuth = function performAuth() {\n        props.fetchCurrentUser('mihai');\n    };\n\n    var loginContent = props.auth ? _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' }) : _react2.default.createElement(\n        'button',\n        { onClick: function onClick() {\n                return performAuth();\n            } },\n        'Please login'\n    );\n\n    return _react2.default.createElement(\n        'div',\n        null,\n        loginContent\n    );\n};\n\nfunction mapStateToProps(state) {\n    return {\n        auth: state.auth\n    };\n};\n\nfunction mapDispatchToProps(dispatch) {\n    return (0, _redux.bindActionCreators)({\n        fetchCurrentUser: _actions.fetchCurrentUser\n    }, dispatch);\n}\n\nexports.default = {\n    component: (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(LoginPage)\n};\n\n//# sourceURL=webpack://react-ssr/./src/client/pages/LoginPage/LoginPage.js?");
+
+/***/ }),
+
+/***/ "./src/client/pages/NotFoundPage/NotFoundPage.js":
+/*!*******************************************************!*\
+  !*** ./src/client/pages/NotFoundPage/NotFoundPage.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar NotFoundPage = function NotFoundPage(_ref) {\n    var _ref$staticContext = _ref.staticContext,\n        staticContext = _ref$staticContext === undefined ? {} : _ref$staticContext;\n\n    staticContext.notFound = true;\n    return _react2.default.createElement(\n        'h1',\n        null,\n        'Route not found.'\n    );\n};\n\nexports.default = {\n    component: NotFoundPage\n};\n\n//# sourceURL=webpack://react-ssr/./src/client/pages/NotFoundPage/NotFoundPage.js?");
+
+/***/ }),
+
+/***/ "./src/client/pages/ProductDetailsPage/ProductDetailsPage.js":
+/*!*******************************************************************!*\
+  !*** ./src/client/pages/ProductDetailsPage/ProductDetailsPage.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _actions = __webpack_require__(/*! ../../actions */ \"./src/client/actions/index.js\");\n\nvar _reactRedux = __webpack_require__(/*! react-redux */ \"react-redux\");\n\nvar _reactRouter = __webpack_require__(/*! react-router */ \"react-router\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar ProductDetailsPage = function (_Component) {\n    _inherits(ProductDetailsPage, _Component);\n\n    function ProductDetailsPage() {\n        _classCallCheck(this, ProductDetailsPage);\n\n        return _possibleConstructorReturn(this, (ProductDetailsPage.__proto__ || Object.getPrototypeOf(ProductDetailsPage)).apply(this, arguments));\n    }\n\n    _createClass(ProductDetailsPage, [{\n        key: 'componentDidMount',\n        value: function componentDidMount() {\n            var id = this.props.match.params.id;\n            this.props.fetchProductById(id);\n        }\n    }, {\n        key: 'handleBack',\n        value: function handleBack() {\n            _reactRouter.BrowserHistory.goBack();\n        }\n    }, {\n        key: 'render',\n        value: function render() {\n            var _this2 = this;\n\n            var product = this.props.product;\n\n            return _react2.default.createElement(\n                'div',\n                { className: 'center-align', style: { marginTop: '20px' } },\n                _react2.default.createElement(\n                    'h3',\n                    null,\n                    'Product details page '\n                ),\n                _react2.default.createElement(\n                    'button',\n                    { onClick: function onClick() {\n                            return _this2.handleBack;\n                        } },\n                    'Go back'\n                ),\n                product ? _react2.default.createElement(\n                    'div',\n                    null,\n                    _react2.default.createElement(\n                        'h1',\n                        null,\n                        product.name\n                    ),\n                    _react2.default.createElement(\n                        'p',\n                        null,\n                        product.description\n                    )\n                ) : _react2.default.createElement(\n                    'div',\n                    null,\n                    'Loading...'\n                )\n            );\n        }\n    }]);\n\n    return ProductDetailsPage;\n}(_react.Component);\n\n;\n\nfunction mapStateToProps(state) {\n    return {\n        product: state.selectedProduct\n    };\n};\n\nfunction loadData(store) {\n    return store.dispatch((0, _actions.fetchProductById)());\n}\n\nexports.default = {\n    component: (0, _reactRedux.connect)(mapStateToProps, { fetchProductById: _actions.fetchProductById })(ProductDetailsPage),\n    loadData: loadData\n};\n\n//# sourceURL=webpack://react-ssr/./src/client/pages/ProductDetailsPage/ProductDetailsPage.js?");
+
+/***/ }),
+
+/***/ "./src/client/pages/ProductsPage/ProductsPage.js":
+/*!*******************************************************!*\
+  !*** ./src/client/pages/ProductsPage/ProductsPage.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRedux = __webpack_require__(/*! react-redux */ \"react-redux\");\n\nvar _actions = __webpack_require__(/*! ../../actions */ \"./src/client/actions/index.js\");\n\nvar _requireAuth = __webpack_require__(/*! ../../components/hocs/requireAuth */ \"./src/client/components/hocs/requireAuth.js\");\n\nvar _requireAuth2 = _interopRequireDefault(_requireAuth);\n\nvar _ProductCard = __webpack_require__(/*! ../../components/ProductCard/ProductCard */ \"./src/client/components/ProductCard/ProductCard.js\");\n\nvar _ProductCard2 = _interopRequireDefault(_ProductCard);\n\nvar _ProductsFilter = __webpack_require__(/*! ../../components/ProductsFilter/ProductsFilter */ \"./src/client/components/ProductsFilter/ProductsFilter.js\");\n\nvar _ProductsFilter2 = _interopRequireDefault(_ProductsFilter);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\n// import styles from '../ProductsPage/ProductsPage.css';\n\nvar ProductsPage = function (_Component) {\n    _inherits(ProductsPage, _Component);\n\n    function ProductsPage() {\n        _classCallCheck(this, ProductsPage);\n\n        return _possibleConstructorReturn(this, (ProductsPage.__proto__ || Object.getPrototypeOf(ProductsPage)).apply(this, arguments));\n    }\n\n    _createClass(ProductsPage, [{\n        key: 'componentDidMount',\n        value: function componentDidMount() {\n            this.props.fetchProducts();\n        }\n    }, {\n        key: 'render',\n        value: function render() {\n            if (this.props.products.length > 0) {\n                return _react2.default.createElement(\n                    'div',\n                    null,\n                    _react2.default.createElement(\n                        'div',\n                        null,\n                        _react2.default.createElement(_ProductsFilter2.default, null)\n                    ),\n                    _react2.default.createElement(\n                        'div',\n                        null,\n                        this.props.products.map(function (prod) {\n                            return _react2.default.createElement(_ProductCard2.default, { key: prod.id, product: prod });\n                        })\n                    )\n                );\n            } else {\n                return _react2.default.createElement(\n                    'p',\n                    null,\n                    'Loading...'\n                );\n            }\n        }\n    }]);\n\n    return ProductsPage;\n}(_react.Component);\n\nfunction mapStateToProps(state) {\n    return {\n        products: state.products\n    };\n};\n\nfunction loadData(store) {\n    return store.dispatch((0, _actions.fetchProducts)());\n}\n\nexports.default = {\n    component: (0, _reactRedux.connect)(mapStateToProps, { fetchProducts: _actions.fetchProducts })((0, _requireAuth2.default)(ProductsPage)),\n    loadData: loadData\n};\n\n//# sourceURL=webpack://react-ssr/./src/client/pages/ProductsPage/ProductsPage.js?");
+
+/***/ }),
+
+/***/ "./src/client/reducers/authReducer.js":
+/*!********************************************!*\
+  !*** ./src/client/reducers/authReducer.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n  value: true\n}));\n\nexports.default = function () {\n  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;\n  var action = arguments[1];\n\n  switch (action.type) {\n    case _actions.FETCH_CURRENT_USER:\n      return action.payload.data || false;\n    default:\n      return state;\n  }\n};\n\nvar _actions = __webpack_require__(/*! ../actions */ \"./src/client/actions/index.js\");\n\n//# sourceURL=webpack://react-ssr/./src/client/reducers/authReducer.js?");
+
+/***/ }),
+
+/***/ "./src/client/reducers/cartReducer.js":
+/*!********************************************!*\
+  !*** ./src/client/reducers/cartReducer.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _actions = __webpack_require__(/*! ../actions */ \"./src/client/actions/index.js\");\n\nfunction _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }\n\nexports.default = function () {\n    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];\n    var action = arguments[1];\n\n    switch (action.type) {\n        case _actions.ADD_PROD_TO_CART:\n            return [].concat(_toConsumableArray(new Set([].concat(_toConsumableArray(state), [action.payload.data]))));\n        default:\n            return state;\n    }\n};\n\n//# sourceURL=webpack://react-ssr/./src/client/reducers/cartReducer.js?");
+
+/***/ }),
+
+/***/ "./src/client/reducers/index.js":
+/*!**************************************!*\
+  !*** ./src/client/reducers/index.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _redux = __webpack_require__(/*! redux */ \"redux\");\n\nvar _authReducer = __webpack_require__(/*! ./authReducer */ \"./src/client/reducers/authReducer.js\");\n\nvar _authReducer2 = _interopRequireDefault(_authReducer);\n\nvar _productsReducer = __webpack_require__(/*! ./productsReducer */ \"./src/client/reducers/productsReducer.js\");\n\nvar _productsReducer2 = _interopRequireDefault(_productsReducer);\n\nvar _selectedProductReducer = __webpack_require__(/*! ./selectedProductReducer */ \"./src/client/reducers/selectedProductReducer.js\");\n\nvar _selectedProductReducer2 = _interopRequireDefault(_selectedProductReducer);\n\nvar _cartReducer = __webpack_require__(/*! ./cartReducer */ \"./src/client/reducers/cartReducer.js\");\n\nvar _cartReducer2 = _interopRequireDefault(_cartReducer);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = (0, _redux.combineReducers)({\n    auth: _authReducer2.default,\n    products: _productsReducer2.default,\n    selectedProduct: _selectedProductReducer2.default,\n    cartItems: _cartReducer2.default\n});\n\n//# sourceURL=webpack://react-ssr/./src/client/reducers/index.js?");
+
+/***/ }),
+
+/***/ "./src/client/reducers/productsReducer.js":
+/*!************************************************!*\
+  !*** ./src/client/reducers/productsReducer.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _actions = __webpack_require__(/*! ../actions */ \"./src/client/actions/index.js\");\n\nexports.default = function () {\n    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];\n    var action = arguments[1];\n\n    switch (action.type) {\n        case _actions.FETCH_PRODUCTS:\n            return action.payload.data;\n        default:\n            return state;\n    }\n};\n\n//# sourceURL=webpack://react-ssr/./src/client/reducers/productsReducer.js?");
+
+/***/ }),
+
+/***/ "./src/client/reducers/selectedProductReducer.js":
+/*!*******************************************************!*\
+  !*** ./src/client/reducers/selectedProductReducer.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _actions = __webpack_require__(/*! ../actions */ \"./src/client/actions/index.js\");\n\nexports.default = function () {\n    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;\n    var action = arguments[1];\n\n    switch (action.type) {\n        case _actions.FETCH_PRODUCT_BY_ID:\n            return action.payload.data;\n        default:\n            return state;\n    }\n};\n\n//# sourceURL=webpack://react-ssr/./src/client/reducers/selectedProductReducer.js?");
+
+/***/ }),
+
+/***/ "./src/helpers/createStore.js":
+/*!************************************!*\
+  !*** ./src/helpers/createStore.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _redux = __webpack_require__(/*! redux */ \"redux\");\n\nvar _reduxThunk = __webpack_require__(/*! redux-thunk */ \"redux-thunk\");\n\nvar _reduxThunk2 = _interopRequireDefault(_reduxThunk);\n\nvar _reducers = __webpack_require__(/*! ../client/reducers */ \"./src/client/reducers/index.js\");\n\nvar _reducers2 = _interopRequireDefault(_reducers);\n\nvar _axios = __webpack_require__(/*! axios */ \"axios\");\n\nvar _axios2 = _interopRequireDefault(_axios);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = function (req) {\n    var axiosInstance = _axios2.default.create({\n        baseURL: 'https://wekode-test.netlify.app/.netlify/functions/server',\n        headers: {\n            'Content-Type': 'application/json'\n        }\n    });\n\n    var store = (0, _redux.createStore)(_reducers2.default, {}, (0, _redux.applyMiddleware)(_reduxThunk2.default.withExtraArgument(axiosInstance)));\n\n    return store;\n};\n\n//# sourceURL=webpack://react-ssr/./src/helpers/createStore.js?");
+
+/***/ }),
+
+/***/ "./src/helpers/renderer.js":
+/*!*********************************!*\
+  !*** ./src/helpers/renderer.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _server = __webpack_require__(/*! react-dom/server */ \"react-dom/server\");\n\nvar _reactRouterDom = __webpack_require__(/*! react-router-dom */ \"react-router-dom\");\n\nvar _Routes = __webpack_require__(/*! ../client/Routes */ \"./src/client/Routes.js\");\n\nvar _Routes2 = _interopRequireDefault(_Routes);\n\nvar _reactRedux = __webpack_require__(/*! react-redux */ \"react-redux\");\n\nvar _reactRouterConfig = __webpack_require__(/*! react-router-config */ \"react-router-config\");\n\nvar _serializeJavascript = __webpack_require__(/*! serialize-javascript */ \"serialize-javascript\");\n\nvar _serializeJavascript2 = _interopRequireDefault(_serializeJavascript);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = function (req, store, context) {\n    var content = (0, _server.renderToString)(_react2.default.createElement(\n        _reactRedux.Provider,\n        { store: store },\n        _react2.default.createElement(\n            _reactRouterDom.StaticRouter,\n            { location: req.path, context: context },\n            _react2.default.createElement(\n                'div',\n                null,\n                (0, _reactRouterConfig.renderRoutes)(_Routes2.default)\n            )\n        )\n    ));\n\n    return '\\n        <html>\\n        <head>\\n            <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css\">\\n            <title>React Redux Express - SSR</title>\\n        </head>\\n        <body>\\n            <div id=\"root\">' + content + '</div>\\n            <script>\\n                window.INITIAL_STATE = ' + (0, _serializeJavascript2.default)(store.getState()) + '\\n            </script>\\n            <script src=\"bundle.js\"></script>\\n        </body>\\n        </html>\\n    ';\n};\n\n//# sourceURL=webpack://react-ssr/./src/helpers/renderer.js?");
+
+/***/ }),
+
+/***/ "axios":
+/*!************************!*\
+  !*** external "axios" ***!
+  \************************/
+/***/ ((module) => {
+
+eval("module.exports = require(\"axios\");;\n\n//# sourceURL=webpack://react-ssr/external_%22axios%22?");
+
+/***/ }),
+
+/***/ "babel-polyfill":
+/*!*********************************!*\
+  !*** external "babel-polyfill" ***!
+  \*********************************/
+/***/ ((module) => {
+
+eval("module.exports = require(\"babel-polyfill\");;\n\n//# sourceURL=webpack://react-ssr/external_%22babel-polyfill%22?");
+
+/***/ }),
+
+/***/ "express":
+/*!**************************!*\
+  !*** external "express" ***!
+  \**************************/
+/***/ ((module) => {
+
+eval("module.exports = require(\"express\");;\n\n//# sourceURL=webpack://react-ssr/external_%22express%22?");
+
+/***/ }),
+
+/***/ "express-http-proxy":
+/*!*************************************!*\
+  !*** external "express-http-proxy" ***!
+  \*************************************/
+/***/ ((module) => {
+
+eval("module.exports = require(\"express-http-proxy\");;\n\n//# sourceURL=webpack://react-ssr/external_%22express-http-proxy%22?");
+
+/***/ }),
+
+/***/ "query-string":
+/*!*******************************!*\
+  !*** external "query-string" ***!
+  \*******************************/
+/***/ ((module) => {
+
+eval("module.exports = require(\"query-string\");;\n\n//# sourceURL=webpack://react-ssr/external_%22query-string%22?");
+
+/***/ }),
+
+/***/ "react":
+/*!************************!*\
+  !*** external "react" ***!
+  \************************/
+/***/ ((module) => {
+
+eval("module.exports = require(\"react\");;\n\n//# sourceURL=webpack://react-ssr/external_%22react%22?");
+
+/***/ }),
+
+/***/ "react-dom/server":
+/*!***********************************!*\
+  !*** external "react-dom/server" ***!
+  \***********************************/
+/***/ ((module) => {
+
+eval("module.exports = require(\"react-dom/server\");;\n\n//# sourceURL=webpack://react-ssr/external_%22react-dom/server%22?");
+
+/***/ }),
+
+/***/ "react-redux":
+/*!******************************!*\
+  !*** external "react-redux" ***!
+  \******************************/
+/***/ ((module) => {
+
+eval("module.exports = require(\"react-redux\");;\n\n//# sourceURL=webpack://react-ssr/external_%22react-redux%22?");
+
+/***/ }),
+
+/***/ "react-router":
+/*!*******************************!*\
+  !*** external "react-router" ***!
+  \*******************************/
+/***/ ((module) => {
+
+eval("module.exports = require(\"react-router\");;\n\n//# sourceURL=webpack://react-ssr/external_%22react-router%22?");
+
+/***/ }),
+
+/***/ "react-router-config":
+/*!**************************************!*\
+  !*** external "react-router-config" ***!
+  \**************************************/
+/***/ ((module) => {
+
+eval("module.exports = require(\"react-router-config\");;\n\n//# sourceURL=webpack://react-ssr/external_%22react-router-config%22?");
+
+/***/ }),
+
+/***/ "react-router-dom":
+/*!***********************************!*\
+  !*** external "react-router-dom" ***!
+  \***********************************/
+/***/ ((module) => {
+
+eval("module.exports = require(\"react-router-dom\");;\n\n//# sourceURL=webpack://react-ssr/external_%22react-router-dom%22?");
+
+/***/ }),
+
+/***/ "react-select":
+/*!*******************************!*\
+  !*** external "react-select" ***!
+  \*******************************/
+/***/ ((module) => {
+
+eval("module.exports = require(\"react-select\");;\n\n//# sourceURL=webpack://react-ssr/external_%22react-select%22?");
+
+/***/ }),
+
+/***/ "redux":
+/*!************************!*\
+  !*** external "redux" ***!
+  \************************/
+/***/ ((module) => {
+
+eval("module.exports = require(\"redux\");;\n\n//# sourceURL=webpack://react-ssr/external_%22redux%22?");
+
+/***/ }),
+
+/***/ "redux-thunk":
+/*!******************************!*\
+  !*** external "redux-thunk" ***!
+  \******************************/
+/***/ ((module) => {
+
+eval("module.exports = require(\"redux-thunk\");;\n\n//# sourceURL=webpack://react-ssr/external_%22redux-thunk%22?");
+
+/***/ }),
+
+/***/ "serialize-javascript":
+/*!***************************************!*\
+  !*** external "serialize-javascript" ***!
+  \***************************************/
+/***/ ((module) => {
+
+eval("module.exports = require(\"serialize-javascript\");;\n\n//# sourceURL=webpack://react-ssr/external_%22serialize-javascript%22?");
+
+/***/ }),
+
+/***/ "url":
+/*!**********************!*\
+  !*** external "url" ***!
+  \**********************/
+/***/ ((module) => {
+
+eval("module.exports = require(\"url\");;\n\n//# sourceURL=webpack://react-ssr/external_%22url%22?");
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
 /******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
-/******/
 /******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
+/******/ 		if(__webpack_module_cache__[moduleId]) {
+/******/ 			return __webpack_module_cache__[moduleId].exports;
 /******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
-/******/
+/******/ 	
 /******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
-/******/ })
+/******/ 	
 /************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, exports) {
-
-module.exports = require("react");
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports) {
-
-module.exports = require("react-router-dom");
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-module.exports = require("react-redux");
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-var path = "/.netlify/functions";
-
-var FETCH_CURRENT_USER = exports.FETCH_CURRENT_USER = 'FETCH_CURRENT_USER';
-var FETCH_PRODUCT_BY_ID = exports.FETCH_PRODUCT_BY_ID = 'FETCH_PRODUCT_BY_ID';
-var FETCH_PRODUCTS = exports.FETCH_PRODUCTS = 'FETCH_PRODUCTS';
-
-var createUser = exports.createUser = function createUser(data) {
-    return function () {
-        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState, api) {
-            return regeneratorRuntime.wrap(function _callee$(_context) {
-                while (1) {
-                    switch (_context.prev = _context.next) {
-                        case 0:
-                            _context.next = 2;
-                            return api.post(path + '/users-create', {
-                                body: {
-                                    username: data.username || 'mihai',
-                                    password: data.password || 'test123'
-                                }
-                            }, function (err) {
-                                console.log(err);
-                            });
-
-                        case 2:
-                        case 'end':
-                            return _context.stop();
-                    }
-                }
-            }, _callee, undefined);
-        }));
-
-        return function (_x, _x2, _x3) {
-            return _ref.apply(this, arguments);
-        };
-    }();
-};
-
-var fetchCurrentUser = exports.fetchCurrentUser = function fetchCurrentUser(username) {
-    return function () {
-        var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch, getState, api) {
-            var res;
-            return regeneratorRuntime.wrap(function _callee2$(_context2) {
-                while (1) {
-                    switch (_context2.prev = _context2.next) {
-                        case 0:
-                            api.defaults.headers.common['Authorization'] = 'Basic bWloYWk6dGVzdDEyMw==';
-
-                            _context2.next = 3;
-                            return api.get(path + '/users-get/' + username);
-
-                        case 3:
-                            res = _context2.sent;
-
-
-                            if (res) {
-                                window.localStorage.setItem('authenticated', true);
-                            }
-
-                            dispatch({
-                                type: FETCH_CURRENT_USER,
-                                payload: res
-                            });
-
-                        case 6:
-                        case 'end':
-                            return _context2.stop();
-                    }
-                }
-            }, _callee2, undefined);
-        }));
-
-        return function (_x4, _x5, _x6) {
-            return _ref2.apply(this, arguments);
-        };
-    }();
-};
-
-var fetchProducts = exports.fetchProducts = function fetchProducts() {
-    return function () {
-        var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(dispatch, getState, api) {
-            var res;
-            return regeneratorRuntime.wrap(function _callee3$(_context3) {
-                while (1) {
-                    switch (_context3.prev = _context3.next) {
-                        case 0:
-                            _context3.next = 2;
-                            return api.get(path + '/products');
-
-                        case 2:
-                            res = _context3.sent;
-
-
-                            dispatch({
-                                type: FETCH_PRODUCTS,
-                                payload: { data: res.data.products }
-                            });
-
-                        case 4:
-                        case 'end':
-                            return _context3.stop();
-                    }
-                }
-            }, _callee3, undefined);
-        }));
-
-        return function (_x7, _x8, _x9) {
-            return _ref3.apply(this, arguments);
-        };
-    }();
-};
-
-var fetchProductById = exports.fetchProductById = function fetchProductById(id) {
-    return function () {
-        var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(dispatch, getState, api) {
-            var res;
-            return regeneratorRuntime.wrap(function _callee4$(_context4) {
-                while (1) {
-                    switch (_context4.prev = _context4.next) {
-                        case 0:
-                            _context4.next = 2;
-                            return api.get(path + '/products/' + id);
-
-                        case 2:
-                            res = _context4.sent;
-
-
-                            dispatch({
-                                type: FETCH_PRODUCT_BY_ID,
-                                payload: { data: res.data }
-                            });
-
-                        case 4:
-                        case 'end':
-                            return _context4.stop();
-                    }
-                }
-            }, _callee4, undefined);
-        }));
-
-        return function (_x10, _x11, _x12) {
-            return _ref4.apply(this, arguments);
-        };
-    }();
-};
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports) {
-
-module.exports = require("react-router-config");
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
-module.exports = require("redux");
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _HomePage = __webpack_require__(10);
-
-var _HomePage2 = _interopRequireDefault(_HomePage);
-
-var _App = __webpack_require__(11);
-
-var _App2 = _interopRequireDefault(_App);
-
-var _NotFoundPage = __webpack_require__(13);
-
-var _NotFoundPage2 = _interopRequireDefault(_NotFoundPage);
-
-var _ProductsPage = __webpack_require__(14);
-
-var _ProductsPage2 = _interopRequireDefault(_ProductsPage);
-
-var _LoginPage = __webpack_require__(18);
-
-var _LoginPage2 = _interopRequireDefault(_LoginPage);
-
-var _ProductDetailsPage = __webpack_require__(19);
-
-var _ProductDetailsPage2 = _interopRequireDefault(_ProductDetailsPage);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = [_extends({}, _App2.default, {
-    routes: [_extends({}, _HomePage2.default, {
-        path: '/',
-        exact: true
-    }), _extends({}, _ProductsPage2.default, {
-        path: '/products'
-    }), _extends({}, _LoginPage2.default, {
-        path: '/login'
-    }), _extends({}, _ProductDetailsPage2.default, {
-        path: '/product/:id'
-    }), _extends({}, _NotFoundPage2.default)]
-})];
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-__webpack_require__(8);
-
-var _express = __webpack_require__(9);
-
-var _express2 = _interopRequireDefault(_express);
-
-var _reactRouterConfig = __webpack_require__(4);
-
-var _Routes = __webpack_require__(6);
-
-var _Routes2 = _interopRequireDefault(_Routes);
-
-var _renderer = __webpack_require__(20);
-
-var _renderer2 = _interopRequireDefault(_renderer);
-
-var _createStore = __webpack_require__(23);
-
-var _createStore2 = _interopRequireDefault(_createStore);
-
-var _expressHttpProxy = __webpack_require__(30);
-
-var _expressHttpProxy2 = _interopRequireDefault(_expressHttpProxy);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var app = (0, _express2.default)();
-app.use('/api', (0, _expressHttpProxy2.default)('https://wekode-test.netlify.app'));
-
-app.use(_express2.default.static('public'));
-app.get('*', function (req, res) {
-  var store = (0, _createStore2.default)(req);
-
-  var promises = (0, _reactRouterConfig.matchRoutes)(_Routes2.default, req.path).map(function (_ref) {
-    var route = _ref.route;
-
-    return route.loadData ? route.loadData(store) : null;
-  }).map(function (promise) {
-    if (promise) {
-      return new Promise(function (resolve, reject) {
-        promise.then(resolve).catch(resolve);
-      });
-    }
-  });
-
-  Promise.all(promises).then(function () {
-    var context = {};
-    var content = (0, _renderer2.default)(req, store, context);
-
-    if (context.notFound) {
-      res.status(404);
-    }
-
-    if (context.url) {
-      return res.redirect(301, context.url);
-    }
-
-    res.send(content);
-  });
-});
-
-app.listen(3000, function () {
-  console.log('Listening on port 3000');
-});
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports) {
-
-module.exports = require("babel-polyfill");
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports) {
-
-module.exports = require("express");
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Home = function Home() {
-    return _react2.default.createElement(
-        'div',
-        { className: 'center-align', style: { martingTop: '20px' } },
-        _react2.default.createElement(
-            'h3',
-            null,
-            'Welcome '
-        ),
-        _react2.default.createElement(
-            'p',
-            null,
-            'Check out these awesome features'
-        )
-    );
-};
-
-exports.default = {
-    component: Home
-};
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRouterConfig = __webpack_require__(4);
-
-var _Header = __webpack_require__(12);
-
-var _Header2 = _interopRequireDefault(_Header);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var App = function App(_ref) {
-    var route = _ref.route;
-
-    return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(_Header2.default, null),
-        (0, _reactRouterConfig.renderRoutes)(route.routes)
-    );
-};
-
-exports.default = {
-    component: App
-};
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRouterDom = __webpack_require__(1);
-
-var _reactRedux = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Header = function Header(_ref) {
-    var auth = _ref.auth;
-
-    var authButton = auth ? _react2.default.createElement(
-        'a',
-        { href: '/api/logout' },
-        'Logout'
-    ) : _react2.default.createElement(
-        'a',
-        { href: '/login' },
-        'Login'
-    );
-    return _react2.default.createElement(
-        'nav',
-        null,
-        _react2.default.createElement(
-            'div',
-            { className: 'nav-wrapper' },
-            _react2.default.createElement(
-                _reactRouterDom.Link,
-                { to: '/', className: 'brand-logo' },
-                'React SSR'
-            ),
-            _react2.default.createElement(
-                'ul',
-                { className: 'right' },
-                _react2.default.createElement(
-                    'li',
-                    null,
-                    _react2.default.createElement(
-                        _reactRouterDom.Link,
-                        { to: '/cart' },
-                        'Cart'
-                    )
-                ),
-                _react2.default.createElement(
-                    'li',
-                    null,
-                    _react2.default.createElement(
-                        _reactRouterDom.Link,
-                        { to: '/products' },
-                        'Products'
-                    )
-                ),
-                _react2.default.createElement(
-                    'li',
-                    null,
-                    authButton
-                )
-            )
-        )
-    );
-};
-function mapStateToProps(_ref2) {
-    var auth = _ref2.auth;
-
-    return { auth: auth };
-}
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(Header);
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var NotFoundPage = function NotFoundPage(_ref) {
-    var _ref$staticContext = _ref.staticContext,
-        staticContext = _ref$staticContext === undefined ? {} : _ref$staticContext;
-
-    staticContext.notFound = true;
-    return _react2.default.createElement(
-        'h1',
-        null,
-        'Route not found.'
-    );
-};
-
-exports.default = {
-    component: NotFoundPage
-};
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(2);
-
-var _actions = __webpack_require__(3);
-
-var _requireAuth = __webpack_require__(15);
-
-var _requireAuth2 = _interopRequireDefault(_requireAuth);
-
-var _reactRouterDom = __webpack_require__(1);
-
-var _ProductCard = __webpack_require__(16);
-
-var _ProductCard2 = _interopRequireDefault(_ProductCard);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var ProductsPage = function (_Component) {
-    _inherits(ProductsPage, _Component);
-
-    function ProductsPage() {
-        _classCallCheck(this, ProductsPage);
-
-        return _possibleConstructorReturn(this, (ProductsPage.__proto__ || Object.getPrototypeOf(ProductsPage)).apply(this, arguments));
-    }
-
-    _createClass(ProductsPage, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            this.props.fetchProducts();
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            if (this.props.products.length > 0) {
-                return _react2.default.createElement(
-                    'div',
-                    { className: 'productPage-container' },
-                    this.props.products.map(function (prod) {
-                        return _react2.default.createElement(_ProductCard2.default, { key: prod.id, product: prod });
-                    })
-                );
-            } else {
-                return _react2.default.createElement(
-                    'p',
-                    null,
-                    'Loading...'
-                );
-            }
-        }
-    }]);
-
-    return ProductsPage;
-}(_react.Component);
-
-function mapStateToProps(state) {
-    return {
-        products: state.products
-    };
-};
-
-function loadData(store) {
-    return store.dispatch((0, _actions.fetchProducts)());
-}
-
-exports.default = {
-    component: (0, _reactRedux.connect)(mapStateToProps, { fetchProducts: _actions.fetchProducts })((0, _requireAuth2.default)(ProductsPage)),
-    loadData: loadData
-};
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(2);
-
-var _reactRouterDom = __webpack_require__(1);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-exports.default = function (ChildComponent) {
-    var RequireAuth = function (_Component) {
-        _inherits(RequireAuth, _Component);
-
-        function RequireAuth() {
-            _classCallCheck(this, RequireAuth);
-
-            return _possibleConstructorReturn(this, (RequireAuth.__proto__ || Object.getPrototypeOf(RequireAuth)).apply(this, arguments));
-        }
-
-        _createClass(RequireAuth, [{
-            key: 'render',
-            value: function render() {
-                switch (this.props.auth) {
-                    case false:
-                        return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' });
-                    case null:
-                        return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' });
-                    default:
-                        return _react2.default.createElement(ChildComponent, this.props);
-                }
-            }
-        }]);
-
-        return RequireAuth;
-    }(_react.Component);
-
-    function mapStateToProps(_ref) {
-        var auth = _ref.auth;
-
-        return { auth: auth };
-    }
-
-    return (0, _reactRedux.connect)(mapStateToProps)(RequireAuth);
-};
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRouterDom = __webpack_require__(1);
-
-var _ProductCard = __webpack_require__(17);
-
-var _ProductCard2 = _interopRequireDefault(_ProductCard);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ProductCard = function ProductCard(_ref) {
-    var product = _ref.product;
-
-
-    var addToCart = function addToCart(ev, prod) {
-        console.log('Product added to cart -- ev', ev);
-        console.log('Product added to cart -- prod', prod);
-    };
-
-    return _react2.default.createElement(
-        'div',
-        { className: 'productCard' },
-        _react2.default.createElement(
-            'h4',
-            null,
-            product.name
-        ),
-        _react2.default.createElement(
-            'div',
-            { className: 'productCard-actions' },
-            _react2.default.createElement(
-                'button',
-                { onClick: function onClick(ev) {
-                        return addToCart(ev, product);
-                    } },
-                'Add to cart'
-            ),
-            _react2.default.createElement(
-                _reactRouterDom.Link,
-                { to: '/product/' + product.id },
-                'View product '
-            )
-        )
-    );
-};
-
-exports.default = ProductCard;
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports) {
-
-
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _actions = __webpack_require__(3);
-
-var _reactRedux = __webpack_require__(2);
-
-var _redux = __webpack_require__(5);
-
-var _reactRouterDom = __webpack_require__(1);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var LoginPage = function LoginPage(props) {
-    var performAuth = function performAuth() {
-        props.fetchCurrentUser('mihai');
-    };
-
-    var loginContent = props.auth ? _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' }) : _react2.default.createElement(
-        'button',
-        { onClick: function onClick() {
-                return performAuth();
-            } },
-        'Please login'
-    );
-
-    return _react2.default.createElement(
-        'div',
-        null,
-        loginContent
-    );
-};
-
-function mapStateToProps(state) {
-    return {
-        auth: state.auth
-    };
-};
-
-function mapDispatchToProps(dispatch) {
-    return (0, _redux.bindActionCreators)({
-        fetchCurrentUser: _actions.fetchCurrentUser
-    }, dispatch);
-}
-
-exports.default = {
-    component: (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(LoginPage)
-};
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _actions = __webpack_require__(3);
-
-var _reactRouterDom = __webpack_require__(1);
-
-var _reactRedux = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var ProductDetailsPage = function (_Component) {
-    _inherits(ProductDetailsPage, _Component);
-
-    function ProductDetailsPage() {
-        _classCallCheck(this, ProductDetailsPage);
-
-        return _possibleConstructorReturn(this, (ProductDetailsPage.__proto__ || Object.getPrototypeOf(ProductDetailsPage)).apply(this, arguments));
-    }
-
-    _createClass(ProductDetailsPage, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            var id = this.props.match.params.id;
-            if (id) {
-                this.props.fetchProductById(id);
-            }
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            var product = this.props.product;
-
-            return _react2.default.createElement(
-                'div',
-                { className: 'center-align', style: { martingTop: '20px' } },
-                _react2.default.createElement(
-                    'h3',
-                    null,
-                    'Product details page '
-                ),
-                product ? _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement(
-                        'h1',
-                        null,
-                        product.name
-                    ),
-                    _react2.default.createElement(
-                        'p',
-                        null,
-                        product.description
-                    )
-                ) : _react2.default.createElement(_reactRouterDom.Redirect, { to: '/products' })
-            );
-        }
-    }]);
-
-    return ProductDetailsPage;
-}(_react.Component);
-
+(() => {
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+eval("\n\n__webpack_require__(/*! babel-polyfill */ \"babel-polyfill\");\n\nvar _express = __webpack_require__(/*! express */ \"express\");\n\nvar _express2 = _interopRequireDefault(_express);\n\nvar _queryString = __webpack_require__(/*! query-string */ \"query-string\");\n\nvar _queryString2 = _interopRequireDefault(_queryString);\n\nvar _reactRouterConfig = __webpack_require__(/*! react-router-config */ \"react-router-config\");\n\nvar _reactRouter = __webpack_require__(/*! react-router */ \"react-router\");\n\nvar _Routes = __webpack_require__(/*! ./client/Routes */ \"./src/client/Routes.js\");\n\nvar _Routes2 = _interopRequireDefault(_Routes);\n\nvar _renderer = __webpack_require__(/*! ./helpers/renderer */ \"./src/helpers/renderer.js\");\n\nvar _renderer2 = _interopRequireDefault(_renderer);\n\nvar _createStore = __webpack_require__(/*! ./helpers/createStore */ \"./src/helpers/createStore.js\");\n\nvar _createStore2 = _interopRequireDefault(_createStore);\n\nvar _expressHttpProxy = __webpack_require__(/*! express-http-proxy */ \"express-http-proxy\");\n\nvar _expressHttpProxy2 = _interopRequireDefault(_expressHttpProxy);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar url = __webpack_require__(/*! url */ \"url\");\n\nvar app = (0, _express2.default)();\napp.use('/api', (0, _expressHttpProxy2.default)('https://wekode-test.netlify.app'));\n\napp.use(_express2.default.static('public'));\napp.get('*', function (req, res) {\n  var store = (0, _createStore2.default)(req);\n\n  var promises = (0, _reactRouterConfig.matchRoutes)(_Routes2.default, req.path).filter(function (_ref) {\n    var route = _ref.route;\n    return (0, _reactRouter.matchPath)(req.url, route);\n  }).map(function (_ref2) {\n    var route = _ref2.route;\n\n    return route.loadData ? route.loadData(store) : null;\n  }).map(function (promise) {\n    if (promise) {\n      return new Promise(function (resolve, reject) {\n        promise.then(resolve).catch(resolve);\n      });\n    }\n  });\n\n  Promise.all(promises).then(function () {\n    var context = {\n      test: 1\n    };\n    var content = (0, _renderer2.default)(req, store, context);\n\n    if (context.url) {\n      return res.redirect(301, context.url);\n    }\n\n    if (context.notFound) {\n      res.status(404);\n    }\n\n    res.send(content);\n  });\n});\n\napp.listen(3000, function () {\n  console.log('Listening on port 3000');\n});\n\n//# sourceURL=webpack://react-ssr/./src/index.js?");
+})();
+
+/******/ })()
 ;
-
-function mapStateToProps(state) {
-    return {
-        product: state.selectedProduct
-    };
-};
-
-function loadData(store) {
-    return store.dispatch((0, _actions.fetchProductById)());
-}
-
-exports.default = {
-    component: (0, _reactRedux.connect)(mapStateToProps, { fetchProductById: _actions.fetchProductById })(ProductDetailsPage),
-    loadData: loadData
-};
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _server = __webpack_require__(21);
-
-var _reactRouterDom = __webpack_require__(1);
-
-var _Routes = __webpack_require__(6);
-
-var _Routes2 = _interopRequireDefault(_Routes);
-
-var _reactRedux = __webpack_require__(2);
-
-var _reactRouterConfig = __webpack_require__(4);
-
-var _serializeJavascript = __webpack_require__(22);
-
-var _serializeJavascript2 = _interopRequireDefault(_serializeJavascript);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = function (req, store, context) {
-    var content = (0, _server.renderToString)(_react2.default.createElement(
-        _reactRedux.Provider,
-        { store: store },
-        _react2.default.createElement(
-            _reactRouterDom.StaticRouter,
-            { location: req.path, context: context },
-            _react2.default.createElement(
-                'div',
-                null,
-                (0, _reactRouterConfig.renderRoutes)(_Routes2.default)
-            )
-        )
-    ));
-
-    return '\n        <html>\n        <head>\n            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">\n            <title>React Redux Express - SSR</title>\n        </head>\n        <body>\n            <div id="root">' + content + '</div>\n            <script>\n                window.INITIAL_STATE = ' + (0, _serializeJavascript2.default)(store.getState()) + '\n            </script>\n            <script src="bundle.js"></script>\n        </body>\n        </html>\n    ';
-};
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports) {
-
-module.exports = require("react-dom/server");
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports) {
-
-module.exports = require("serialize-javascript");
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _redux = __webpack_require__(5);
-
-var _reduxThunk = __webpack_require__(24);
-
-var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
-
-var _reducers = __webpack_require__(25);
-
-var _reducers2 = _interopRequireDefault(_reducers);
-
-var _axios = __webpack_require__(29);
-
-var _axios2 = _interopRequireDefault(_axios);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = function (req) {
-    var axiosInstance = _axios2.default.create({
-        baseURL: 'https://wekode-test.netlify.app/.netlify/functions/server',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
-
-    var store = (0, _redux.createStore)(_reducers2.default, {}, (0, _redux.applyMiddleware)(_reduxThunk2.default.withExtraArgument(axiosInstance)));
-
-    return store;
-};
-
-/***/ }),
-/* 24 */
-/***/ (function(module, exports) {
-
-module.exports = require("redux-thunk");
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _redux = __webpack_require__(5);
-
-var _authReducer = __webpack_require__(26);
-
-var _authReducer2 = _interopRequireDefault(_authReducer);
-
-var _productsReducer = __webpack_require__(27);
-
-var _productsReducer2 = _interopRequireDefault(_productsReducer);
-
-var _selectedProductReducer = __webpack_require__(28);
-
-var _selectedProductReducer2 = _interopRequireDefault(_selectedProductReducer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = (0, _redux.combineReducers)({
-    auth: _authReducer2.default,
-    products: _productsReducer2.default,
-    selectedProduct: _selectedProductReducer2.default
-});
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _actions = __webpack_require__(3);
-
-exports.default = function () {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-    var action = arguments[1];
-
-    switch (action.type) {
-        case _actions.FETCH_CURRENT_USER:
-            return action.payload.data || false;
-        default:
-            return state;
-    }
-};
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _actions = __webpack_require__(3);
-
-exports.default = function () {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-    var action = arguments[1];
-
-    switch (action.type) {
-        case _actions.FETCH_PRODUCTS:
-            return action.payload.data;
-        default:
-            return state;
-    }
-};
-
-/***/ }),
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _actions = __webpack_require__(3);
-
-exports.default = function () {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-    var action = arguments[1];
-
-    switch (action.type) {
-        case _actions.FETCH_PRODUCT_BY_ID:
-            return action.payload.data;
-        default:
-            return state;
-    }
-};
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports) {
-
-module.exports = require("axios");
-
-/***/ }),
-/* 30 */
-/***/ (function(module, exports) {
-
-module.exports = require("express-http-proxy");
-
-/***/ })
-/******/ ]);
