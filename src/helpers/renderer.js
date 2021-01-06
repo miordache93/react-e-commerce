@@ -18,6 +18,7 @@ export default (req, store, context) => {
     return `
         <html>
         <head>
+            <base href="/" />
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
             <title>React Redux Express - SSR</title>
         </head>

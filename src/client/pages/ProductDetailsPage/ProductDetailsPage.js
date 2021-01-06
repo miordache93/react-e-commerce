@@ -1,26 +1,22 @@
 import React, { Component } from 'react';
 import {fetchProductById} from '../../actions';
 import { connect } from 'react-redux';
-import { BrowserHistory } from 'react-router';
+import { withRouter } from "react-router";
 
 class ProductDetailsPage extends Component {
-    
+
     componentDidMount() {
         const id = this.props.match.params.id;
         this.props.fetchProductById(id);
     }
 
 
-    handleBack() {
-        BrowserHistory.goBack();
-    }
-
     render() {
         const { product } = this.props;
         return (
             <div className="center-align" style={{ marginTop: '20px' }}>
                 <h3>Product details page </h3>
-                <button onClick={() => this.handleBack}>Go back</button>
+                <button onClick={() => this.props.history.push('/products')}>Go back</button>
                 {
                     product ? (
                         <div>
@@ -47,6 +43,6 @@ function loadData(store) {
 }
 
 export default {
-    component: connect(mapStateToProps, { fetchProductById })(ProductDetailsPage),
+    component: connect(mapStateToProps, { fetchProductById })(withRouter(ProductDetailsPage)),
     loadData
 };
